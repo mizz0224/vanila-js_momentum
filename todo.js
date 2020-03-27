@@ -1,29 +1,49 @@
 const toDoForm  = document.querySelector(".js-toDoForm"),
     toDoInput = toDoForm.querySelector("input"),
     toDoList = document.querySelector(".js-toDoList");
+
 const TODOS_LS = "toDos"; 
+
 let toDos  = [];
+function emptyNumber(LengthOfArray)
+{ 
+    for(let i =0;i<LengthOfArray+1;i++)
+    {
+        for(let j = 0; j<LengthOfArray;j++)
+        {
+            if(toDos[j].id!=i)
+            {
+                return i;
+    
+    
+            }
+        }
+    }
+}
 function paintToDo(text)
 {
     const li = document.createElement("li");
     const delBtn = document.createElement("button");
     const span = document.createElement("span");
     const newId = toDos.length + 1;
+    
     delBtn.innerText = "❌";
     delBtn.addEventListener("click",deleteToDo);
-   
+    
     span.innerText = text;
+    
     li.appendChild(span);
     li.appendChild(delBtn);
     li.id = newId;
+    
     toDoList.appendChild(li);
+    
     const toDoObj = {
-        text : text,id : newId
+        text : text,id : emptyNumber(toDos.length)
     };
+    
     toDos.push(toDoObj);
     saveToDos();
-
-
 }
 
 function saveToDos()
@@ -39,10 +59,9 @@ function deleteToDo(event)
         return toDo.id !== parseInt(li.id);
     });
     toDos = cleanToDos;
-    
     saveToDos(toDos);
+    ///window.location.reload();//새로고침추가 새로고침 안할시 li.id 중복현상발생,삭제시 중복삭제
     //loadToDos(toDos);
-
 }
 function handleSubmit(event)
 {
@@ -65,7 +84,6 @@ function loadToDos()
         parsedToDos.forEach(xxxx);
 
     }
-    
 }
 function init()
 {
