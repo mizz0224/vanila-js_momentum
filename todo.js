@@ -3,20 +3,15 @@ const toDoForm  = document.querySelector(".js-toDoForm"),
     toDoList = document.querySelector(".js-toDoList");
 
 const TODOS_LS = "toDos"; 
-
+let count_Nums = 0;
 let toDos  = [];
 function emptyNumber(LengthOfArray)
 { 
-    for(let i =0;i<LengthOfArray+1;i++)
+    for(let i = 0; i<LengthOfArray;i++)
     {
-        for(let j = 0; j<LengthOfArray;j++)
+        if(toDos.includes(i)==false)
         {
-            if(toDos[j].id!=i)
-            {
-                return i;
-    
-    
-            }
+            return i;
         }
     }
 }
@@ -41,7 +36,7 @@ function paintToDo(text)
     const toDoObj = {
         text : text,id : emptyNumber(toDos.length)
     };
-    
+    count_Nums++;
     toDos.push(toDoObj);
     saveToDos();
 }
